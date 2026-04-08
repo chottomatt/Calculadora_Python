@@ -25,82 +25,114 @@ frame_tela.grid(row=0, column=0)
 frame_corpo = Frame(janela, width=235, height=268, bg=cor1)
 frame_corpo.grid(row=1, column=0)
 
-# Labels
+# Variable of all values
+todos_valores = ''
 
-app_label = Label(frame_tela, text='123456789', width=16, height=2, padx=7, relief=FLAT, anchor="e", justify=RIGHT, font=('Ivy 18'), 
+# Labels
+text_value = StringVar()
+
+# Function
+def entrar_valores(event):
+
+    global todos_valores
+
+    todos_valores = todos_valores + str(event)
+    
+    text_value.set(todos_valores)
+
+# Calculate
+def calculate():
+    global todos_valores
+    try:
+        resultado = eval(todos_valores)
+        text_value.set(str(resultado))
+    except:
+        text_value.set("Error")
+        todos_valores = ""
+
+# Clean screen
+def clean_screen():
+    global todos_valores
+    todos_valores =""
+    text_value.set("")
+
+
+
+app_label = Label(frame_tela, textvariable=text_value, width=16, height=2, padx=7, relief=FLAT, anchor="e", justify=RIGHT, font=('Ivy 18'), 
                   bg=cor1, fg=cor4)
 app_label.place(x=0,y=0)
 # Creating buttons
 # Clear button (b_1)
-b_1 = Button(frame_corpo, text="C", width=11, height=2, bg=cor3, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_1 = Button (frame_corpo, command=clean_screen, text=('C'), width=11, height=2, bg=cor3, font=('MSSerif 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_1.place(x=0, y=4)
 b_1.config(fg=cor4)
+
 # Remainder operator (b_2)
-b_2 = Button(frame_corpo, text="%", width=5, height=2,bg=cor3, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_2 = Button(frame_corpo, command=lambda: entrar_valores('%'), text="%", width=5, height=2,bg=cor3, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_2.place(x=118, y=4)
 b_2.config(fg=cor4)
 # Division button (b_3)
-b_3 = Button(frame_corpo, text="/", width=5, height=2, bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_3 = Button(frame_corpo, command=lambda: entrar_valores('/'), text="/", width=5, height=2, bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_3.place(x=177, y=4)
 
 # 7 (b_4)
-b_4 = Button(frame_corpo, text="7", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_4 = Button(frame_corpo, command=lambda: entrar_valores('7'), text="7", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_4.place(x=0, y=55)
 b_4.config(fg=cor4)
 # 8 (b_5)
-b_5 = Button(frame_corpo, text="8", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_5 = Button(frame_corpo,command=lambda: entrar_valores('8'), text="8", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_5.place(x=59, y=55)
 b_5.config(fg=cor4)
 # 9 (b_6)
-b_6 = Button(frame_corpo, text="9", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_6 = Button(frame_corpo, command=lambda: entrar_valores('9'), text="9", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_6.place(x=118, y=55)
 b_6.config(fg=cor4)
 # Multiply button (b_7)
-b_7 = Button(frame_corpo, text="x", width=5, height=2,bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_7 = Button(frame_corpo, command=lambda: entrar_valores('*'), text="x", width=5, height=2,bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_7.place(x=177, y=55)
 
 # 4 (b_8)
-b_8 = Button(frame_corpo, text="4", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_8 = Button(frame_corpo, command=lambda: entrar_valores('4'), text="4", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_8.place(x=0, y=105)
 b_8.config(fg=cor4)
 # 5 (b_9)
-b_9 = Button(frame_corpo, text="5", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_9 = Button(frame_corpo, command=lambda: entrar_valores('5'), text="5", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_9.place(x=59, y=105)
 b_9.config(fg=cor4)
 # 6 (b_10)
-b_10 = Button(frame_corpo, text="6", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_10 = Button(frame_corpo, command=lambda: entrar_valores('6'), text="6", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_10.place(x=118, y=105)
 b_10.config(fg=cor4)
 # Subtraction button (b_11)
-b_11 = Button(frame_corpo, text="-", width=5, height=2, bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_11 = Button(frame_corpo, command=lambda: entrar_valores('-'), text="-", width=5, height=2, bg=cor5, font=('Courier 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_11.place(x=177, y=105)
 
 # 1 (b_12)
-b_12 = Button(frame_corpo, text="1", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_12 = Button(frame_corpo, command=lambda: entrar_valores('1'), text="1", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_12.place(x=0, y=155)
 b_12.config(fg=cor4)
 # 2 (b_13)
-b_13 = Button(frame_corpo, text="2", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_13 = Button(frame_corpo, command=lambda: entrar_valores('2'), text="2", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_13.place(x=59, y=155)
 b_13.config(fg=cor4)
 # 3 (b_14)
-b_14 = Button(frame_corpo, text="3", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_14 = Button(frame_corpo, command=lambda: entrar_valores('3'), text="3", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_14.place(x=118, y=155)
 b_14.config(fg=cor4)
 # Addition button (b_15)
-b_15 = Button(frame_corpo, text="+", width=5, height=2,bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_15 = Button(frame_corpo, command=lambda: entrar_valores('+'), text="+", width=5, height=2,bg=cor5, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_15.place(x=177, y=155)
 
 # 0 (b_16)
-b_16 = Button(frame_corpo, text="0", width=11, height=2, bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_16 = Button(frame_corpo, command=lambda: entrar_valores('0'), text="0", width=11, height=2, bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_16.place(x=0, y=205)
 b_16.config(fg=cor4)
 # Comma (b_17)
-b_17 = Button(frame_corpo, text=",", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_17 = Button(frame_corpo, command=lambda: entrar_valores('.'), text=".", width=5, height=2,bg=cor2, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_17.place(x=118, y=205)
 b_17.config(fg=cor4)
 # Equal/result button (b_18)
-b_18 = Button(frame_corpo, text="=", width=5, height=2, bg=cor6, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
+b_18 = Button(frame_corpo, command= calculate, text="=", width=5, height=2, bg=cor6, font=('Ivy 13 bold'), relief=RAISED, overrelief=RIDGE)
 b_18.place(x=177, y=205)
 b_18.config(fg=cor4)
 
