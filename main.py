@@ -3,7 +3,6 @@ from tkinter import *
 from tkinter import ttk
 
 #Geral colors
-
 color1 = "#000000" # Black to background
 color2 = "#212121" # Kinda Clear Black
 color3 = "#3F3F3F" # Clearer Black
